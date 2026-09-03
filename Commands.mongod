@@ -113,6 +113,32 @@ db.restaurantes.aggregate([
   }
 ])
 
+8)
+
+db.restaurantes.aggregate([
+  {
+    $project: {
+      _id: 0,
+      name: 1,
+      fullAddress: { $concat: ["$address.building", " - ", "$address.street"] },
+      zipcode: "$address.zipcode"
+    }
+  },
+  {
+    $match: { zipcode: "10019" }
+  },
+  {
+    $sort: { name: 1 }
+  },
+  {
+    $project: {
+      zipcode: 0
+    }
+  }
+])
+
+
+
 
 
 
