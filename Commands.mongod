@@ -1,0 +1,66 @@
+Exercícios:
+
+1) 
+
+db.restaurantes.aggregate([
+  { 
+    $match: { borough: 'Bronx' } 
+  }
+])
+
+2)
+
+db.restaurantes.aggregate([
+  {
+    $match: {borough: 'Manhattan'	}
+  },
+  {
+    $project: {
+      _id: 0,
+      name: 1,
+      borough: 1,
+      cuisine: 1
+    }
+  }
+])
+
+3)
+
+
+db.restaurantes.aggregate([
+  {
+    $match: {borough: 'Brooklyn'	}
+  },
+  {
+    $sort: {name: 1}
+  },
+  {
+    $limit: 5
+  },
+  {
+    $project: {
+      _id: 0,
+      name: 1,
+      borough: 1,
+    }
+  }
+])
+
+4)
+
+db.restaurantes.aggregate([
+  {
+    $match:
+    {
+      borough: 'Bronx'
+    }
+  },
+  {
+    $match:
+    {
+      cuisine: 'Bakery'
+    }
+  }
+])
+
+
