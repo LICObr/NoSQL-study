@@ -63,4 +63,56 @@ db.restaurantes.aggregate([
   }
 ])
 
+5)
+
+db.restaurantes.aggregate([
+  { 
+    $sort: { name: -1 } 
+  },
+  { 
+    $limit: 10 
+  },
+  { 
+    $project: { 
+      _id: 0, 
+      name: 1, 
+      cuisine: 1 
+    }
+  }
+])
+
+
+6)
+
+db.restaurantes.aggregate([
+  { $match: { borough: 'Queens' } },
+  { $sort: { 'address.zipcode': 1 } },
+  { $project: { _id: 0, name: 1, 'address.zipcode': 1, borough: 1 } }
+])
+
+
+7)
+
+db.restaurantes.aggregate([
+  {
+    $match: {
+      borough: { $in: ["Bronx", "Brooklyn"] },
+      cuisine: "American "
+    }
+  }
+])
+
+Variação do 7
+
+db.restaurantes.aggregate([
+  {
+    $match: {
+      borough: { $in: ["Bronx", "Brooklyn"] },
+      cuisine: { $regex: /^American/ }
+    }
+  }
+])
+
+
+
 
